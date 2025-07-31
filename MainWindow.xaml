@@ -1,0 +1,457 @@
+﻿<Window x:Class="WpfApp9.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp9"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="900" Width="1280"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Icon="C:\Users\o.litvin\Desktop\Projekte\WpfApp9\icon.png">
+    <!--Grid-->
+    <Grid>
+        <StackPanel>
+            <StackPanel.Background>
+                <RadialGradientBrush GradientOrigin="0.5, 0.5"
+                                     Center="0.5, 0.5"
+                                     RadiusX="0.5"
+                                     RadiusY="0.5">
+                    <GradientStop Color="#03164a" Offset="0"/>
+                    <GradientStop Color="#031033" Offset="1.5"/>
+                </RadialGradientBrush>
+            </StackPanel.Background>
+            <!--Upper-->
+            <StackPanel Name="TitleBar" Height="40" Orientation="Horizontal" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#04d7df" Offset="0"/>
+                        <GradientStop Color="#e514fc" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                
+                <StackPanel Height="40" Width="300" Margin="880,0,0,0" Orientation="Horizontal">
+                    <Button Content="🔍" 
+                            Width="60" 
+                            Height="30"
+                            Background="Transparent"
+                            BorderBrush="White"
+                            Foreground="White"
+                            BorderThickness="1.5"
+                            Margin="0,0,5,0"
+                            Click="Search_Click"
+                            Cursor="Hand"/>
+                    <TextBox Name="SearchBox"
+                             Width="220" 
+                             Height="30"
+                             Background="Transparent"
+                             BorderBrush="White"
+                             BorderThickness="1.5"
+                             Foreground="White"
+                             VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Height="40" Width="100" Orientation="Horizontal">
+                    <Button Content="-" 
+                            Width="50"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Foreground="White"
+                            FontSize="20"
+                            Click="Minimize_Click"
+                            Cursor="Hand"/>
+                    <Button Content="x" 
+                            Width="50"
+                            BorderThickness="0"
+                            Background="Transparent"
+                            Foreground="White"
+                            FontSize="15"
+                            Click="Close_Click"
+                            Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Height="850" Orientation="Horizontal">
+                <!--Left-->
+                <StackPanel Height="850" Width="300">
+                    <StackPanel Width="300" Height="250">
+                        <Calendar x:Name="CalendarInput"
+                                  Margin="0,8,0,0"
+                                  Background="White"
+                                  BorderBrush="Transparent"
+                                  BorderThickness="0"
+                                  Foreground="White"
+                                  SelectedDatesChanged="CalendarInput_SelectedDatesChanged">
+                            <Calendar.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                            </Calendar.LayoutTransform>
+                        </Calendar>
+                    </StackPanel>
+                    <StackPanel Width="300" Height="600">
+                        <Button Content="📋 All" 
+                                Width="280" 
+                                Height="40" 
+                                HorizontalContentAlignment="Left" 
+                                Padding="10,0,0,0" 
+                                FontSize="12" 
+                                BorderThickness="0" 
+                                Margin="0,0,0,1"
+                                Background="Transparent"
+                                Foreground="WhiteSmoke"
+                                Click="All_Click"
+                                Cursor="Hand"/>
+                        <Button Content="⏳ Pending" Width="280" 
+                                Height="40" 
+                                HorizontalContentAlignment="Left" 
+                                Padding="10,0,0,0" 
+                                FontSize="12" 
+                                BorderThickness="0" 
+                                Margin="0,0,0,1"
+                                Background="Transparent"
+                                Foreground="WhiteSmoke"
+                                Click="Pending_Click"
+                                Cursor="Hand"/>
+                        <Button Content="✔ Complete" 
+                                Width="280" 
+                                Height="40" 
+                                HorizontalContentAlignment="Left" 
+                                Padding="10,0,0,0" 
+                                FontSize="12" 
+                                BorderThickness="0" 
+                                Margin="0,0,0,1"
+                                Background="Transparent"
+                                Foreground="WhiteSmoke"
+                                Click="Complete_Click"
+                                Cursor="Hand"/>
+                        <Button Content="⚙️ Manage Categories" 
+                                Width="280" 
+                                Height="40" 
+                                HorizontalContentAlignment="Left" 
+                                Padding="10,0,0,0" 
+                                FontSize="12" 
+                                BorderThickness="0" 
+                                Margin="0,0,0,1"
+                                Background="Transparent"
+                                Foreground="White"
+                                Click="Manage_Click"
+                                Cursor="Hand"/>
+                        <StackPanel Height="430" Visibility="Hidden" Name="ManageCategoryPannel">
+                            <StackPanel.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="Gray" Offset="-1"/>
+                                    <GradientStop Color="#03164a" Offset="1"/>
+                                </LinearGradientBrush>
+                            </StackPanel.Background>
+                            <ListBox Height="330" 
+                                     Margin="5,5,5,30"
+                                     Name="ListBoxOutput" 
+                                     BorderThickness="0" 
+                                     Background="Transparent" 
+                                     Foreground="White"
+                                     HorizontalContentAlignment="Center"
+                                     FontSize="15"/>
+                            <StackPanel Orientation="Horizontal" Height="35">
+                                <TextBox Width="195" Margin="5,0,0,0" Name="InputCategory" Foreground="White" BorderThickness="1.5" BorderBrush="White" Background="Transparent" VerticalContentAlignment="Center"/>
+                                <Button Content="Add/Delete" 
+                                        Width="90" 
+                                        Margin="5,0,0,0"
+                                        Foreground="White"
+                                        BorderThickness="0"
+                                        Click="Add_Click"
+                                        Cursor="Hand">
+                                    <Button.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Color="#04d7df" Offset="-1"/>
+                                            <GradientStop Color="#e514fc" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Height="850" Width="0.7">
+                    <StackPanel.Background>
+                        <RadialGradientBrush GradientOrigin="0.5, 0.5"
+                         Center="0.5, 0.5"
+                         RadiusX="0.5"
+                         RadiusY="0.5">
+                            <GradientStop Color="#757575" Offset="0"/>
+                            <GradientStop Color="#031033" Offset="0.9"/>
+                        </RadialGradientBrush>
+                    </StackPanel.Background>
+                </StackPanel>
+                <!--Right-->
+                <StackPanel Height="850" Width="980">
+                    <StackPanel Height="40" Orientation="Horizontal">
+                        <StackPanel Width="490" Height="40" Orientation="Horizontal">
+                            <Button Content="All"
+                                    Padding="5" 
+                                    Background="Transparent" 
+                                    BorderThickness="0" 
+                                    Height="25" 
+                                    VerticalAlignment="Bottom" 
+                                    Foreground="WhiteSmoke"
+                                    Click="All_Click"
+                                    Cursor="Hand"/>
+                            <!--Categories Buttons-->
+                            <ItemsControl ItemsSource="{Binding Category}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Content="{Binding}"
+                                                Click="CategoryButton_Click"
+                                                Padding="5" 
+                                                Background="Transparent" 
+                                                BorderThickness="0" 
+                                                Height="25" 
+                                                VerticalAlignment="Bottom" 
+                                                Foreground="WhiteSmoke"
+                                                Cursor="Hand"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <!--Delete/Add-->
+                        <StackPanel Width="480" Height="40" Orientation="Horizontal">
+                            <Button Content="Add Task" 
+                                    Padding="25,0,25,0" 
+                                    Height="30" 
+                                    VerticalAlignment="Bottom" 
+                                    Margin="230,0,5,0"
+                                    Foreground="WhiteSmoke"
+                                    BorderThickness="0"
+                                    Click="AddTask_Click"
+                                    Cursor="Hand">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#04d7df" Offset="-1"/>
+                                        <GradientStop Color="#e514fc" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                            <Button Content="Delete Selected?" 
+                                    Padding="20,0,20,0" 
+                                    Height="30" 
+                                    VerticalAlignment="Bottom"
+                                    Background="Transparent"
+                                    Foreground="WhiteSmoke"
+                                    BorderThickness="1"
+                                    Margin="0,0,0,0"
+                                    Click="DeleteTask_Click"
+                                    Cursor="Hand">
+                                <Button.BorderBrush>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#04d7df" Offset="-1"/>
+                                        <GradientStop Color="#e514fc" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.BorderBrush>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <!--Form/DataGrid-->
+                    <StackPanel Height="810">
+                        <DataGrid x:Name="MyDataGrid"
+                                  IsReadOnly="False"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  AutoGenerateColumns="False"
+                                  HorizontalAlignment="Center"
+                                  GridLinesVisibility="None"
+                                  BorderThickness="0"
+                                  RowBackground="Transparent"
+                                  AlternatingRowBackground="Transparent"
+                                  Margin="20,30,0,0"
+                                  AlternationCount="2"
+                                  SelectionUnit="FullRow"
+                                  Background="Transparent"
+                                  CellEditEnding="MyDataGrid_CellEditEnding">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="LightGray"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Margin" Value="0,3,0,3"/>
+                                    <Setter Property="Padding" Value="0,3,0,3"/>
+                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="BorderBrush" Value="Transparent"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="DataGridRow">
+                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                        Margin="{TemplateBinding Margin}"
+                                                        Padding="{TemplateBinding Padding}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        Background="{TemplateBinding Background}">
+                                                    <DataGridCellsPresenter/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="AlternationIndex" Value="0">
+                                            <Setter Property="Background" Value="Yellow"/>
+                                        </Trigger>
+                                        <Trigger Property="AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="LightBlue"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter Property="Background" Value="Orange"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                            <!--Rows-->
+                            <DataGrid.Columns>
+                                <!--<DataGridCheckBoxColumn Width="50" Binding="{Binding Done}"/>-->
+                                <!--CheckBox-->
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button x:Name="MyButtonBox"
+                                                    Content="{Binding Done}" 
+                                                    Width="20"
+                                                    Height="20"
+                                                    BorderThickness="0"
+                                                    BorderBrush="White"
+                                                    FontSize="16"
+                                                    Click="Check_Click"
+                                                    Cursor="Hand"
+                                                    Background="Transparent"
+                                                    Foreground="White"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="280" Foreground="WhiteSmoke"/>
+
+                                <!--Category-->
+                                <DataGridTemplateColumn Header="Category" Width="160">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Category}"
+                                                       TextDecorations="Underline">
+                                                <TextBlock.Foreground>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#04d7df" Offset="0.5"/>
+                                                        <GradientStop Color="#e514fc" Offset="2"/>
+                                                    </LinearGradientBrush>
+                                                </TextBlock.Foreground>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+
+                                    <DataGridTemplateColumn.CellEditingTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding DataContext.Category, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                      SelectedItem="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                      Cursor="Hand"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+
+                                <!--StartDate-->
+                                <DataGridTextColumn Header="Start Date" Width="160" Foreground="WhiteSmoke">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="StartDate" StringFormat="dd/MM/yyyy"/>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <!--EndDate-->
+                                <DataGridTextColumn Header="End Date" Width="160" Foreground="WhiteSmoke">
+                                    <DataGridTextColumn.Binding>
+                                        <Binding Path="EndDate" StringFormat="dd/MM/yyyy"/>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="130" Foreground="WhiteSmoke"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <!--Add Task-->
+                        <StackPanel Name="AddTaskPanel" Height="50" Orientation="Horizontal" Visibility="Hidden">
+                            <StackPanel.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="Gray" Offset="-1"/>
+                                    <GradientStop Color="#03164a" Offset="1"/>
+                                </LinearGradientBrush>
+                            </StackPanel.Background>
+                            <TextBox Name="SaveText" Width="300" Height="25" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                            <ComboBox Name="SaveCombo" Width="180" Height="25" Margin="5,0,0,0" ItemsSource="{Binding Category}"/>
+                            <DatePicker Name="SaveStartDate" Width="150" Height="25" Margin="5,0,0,0"/>
+                            <DatePicker Name="SaveEndDate" Width="150" Height="25" Margin="5,0,0,0"/>
+                            <Button Content="Add" 
+                                    Width="135" 
+                                    Height="30" 
+                                    Margin="15,0,0,0"
+                                    BorderThickness="0"
+                                    Foreground="White"
+                                    Click="Save_Click"
+                                    Cursor="Hand">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#04d7df" Offset="-1.5"/>
+                                        <GradientStop Color="#e514fc" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        
+        <!--Canvas-->
+        <Canvas>
+            <StackPanel Name="SaveWindow" Width="350" Height="200" Canvas.Left="480" Canvas.Top="300" Visibility="Hidden">
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#04d7df" Offset="-0.5"/>
+                        <GradientStop Color="#e514fc" Offset="1"/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <StackPanel Height="110">
+                    <TextBlock Text="Would you like to save?" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,60,0,0" FontSize="15" Foreground="White"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Save"
+                            Width="80" 
+                            Height="30" 
+                            FontSize="13" 
+                            BorderThickness="1.5"
+                            BorderBrush="White"
+                            Foreground="White"
+                            Background="Transparent"
+                            Click="SaveExit_Click"/>
+                    <Button Content="Dont Save"
+                            Width="80" 
+                            Height="30" 
+                            FontSize="13" 
+                            BorderThickness="1.5"
+                            BorderBrush="White"
+                            Foreground="White"
+                            Background="Transparent"
+                            Margin="5,0,0,0"
+                            Click="NoSaveExit_Click"/>
+                    <Button Content="Cancel"
+                            Width="80" 
+                            Height="30" 
+                            FontSize="13" 
+                            BorderThickness="1.5"
+                            BorderBrush="White"
+                            Foreground="White"
+                            Background="Transparent"
+                            Margin="5,0,0,0"
+                            Click="Cancel_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Canvas>
+    </Grid>
+</Window>
